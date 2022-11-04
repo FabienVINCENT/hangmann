@@ -11,7 +11,7 @@
     "build-only": "vite build --base=./",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "git": "npm run build && git add . && git commit -m",
+    "git": "npm run build && git add . && git add dist -f && git commit -m",
     "postgit": "git push && git subtree push --prefix dist origin gh-pages"
 
   },
