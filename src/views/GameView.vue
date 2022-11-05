@@ -16,6 +16,7 @@ const init = () => {
   step.value = 0;
   wrongLetters.value = [];
   rightLetters.value = [];
+  isWinner.value = false;
   // Choose word
   const randomWord = wordsList[Math.floor(Math.random() * wordsList.length)];
   word.value = randomWord.split("") as Letter[];
@@ -46,7 +47,6 @@ const handleLetter = (letter: Letter) => {
 };
 
 watch(step, (newStep) => {
-  console.log("-> newStep", newStep);
   if (newStep >= 6) {
     word.value.forEach((letter) => {
       if (!rightLetters.value.includes(letter)) {
@@ -60,18 +60,50 @@ onMounted(() => init());
 </script>
 
 <template>
-  <div>
+  <div class="min-h-screen flex flex-col justify-between items-center wrapper">
     <HangmanBoy :step="step" />
     <Word :word="word" :rightLetters="rightLetters" />
     <Keyboard
-      v-if="step < 6"
+      v-if="step < 6 && !isWinner"
       :wrongLetters="wrongLetters"
       :rightLetters="rightLetters"
       @letter="handleLetter"
     />
-    <div v-else>Game Over<button @click="init">Retry</button></div>
-    <div v-if="isWinner">GG<button @click="init">Retry</button></div>
+    <div v-else-if="!isWinner" class="p-4 w-full">
+      <div class="card card-alert">
+        <span>Game Over</span>
+        <button class="btn-alert" @click="init">Retry</button>
+      </div>
+    </div>
+    <div v-else-if="isWinner" class="p-4 w-full">
+      <div class="card card-success">
+        <span>Victory !</span>
+        <button class="btn-success" @click="init">Retry</button>
+      </div>
+    </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+button {
+  @apply flex-shrink-0 text-white border-0 py-2 px-8 focus:outline-none rounded text-lg mt-10 sm:mt-0;
+}
+.btn-alert {
+  @apply bg-red-500 hover:bg-red-600;
+}
+.btn-success {
+  @apply bg-green-500 hover:bg-green-600;
+}
+.wrapper > * {
+  @apply m-4 basis-full max-w-md;
+}
+.card {
+  @apply border w-full p-4 rounded-md flex flex-col justify-center items-center;
+}
+.card-alert {
+  @apply bg-red-200 border-red-300;
+}
+.card-success {
+  @apply bg-green-200 border-green-300;
+}
+</style>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import HangmanBase from "./HangmanBase.vue";
 import HangmanHead from "./HangmanHead.vue";
 import HangmanBody from "./HangmanBody.vue";
@@ -11,41 +12,56 @@ type Props = {
   step?: number;
 };
 
+const sizeX = ref(500);
+const sizeY = ref(500);
+
 withDefaults(defineProps<Props>(), { step: 0 });
 </script>
 
 <template>
-  <div class="border m-2">
-    <div class="relative">
-      <HangmanBase :x="500" :y="500" />
-      <HangmanHead v-if="step >= 1" class="absolute top-0" :x="500" :y="500" />
-      <HangmanBody v-if="step >= 2" class="absolute top-0" :x="500" :y="500" />
-      <HangmanLeftArm
-        v-if="step >= 3"
-        class="absolute top-0"
-        :x="500"
-        :y="500"
-      />
-      <HangmanRightArm
-        v-if="step >= 4"
-        class="absolute top-0"
-        :x="500"
-        :y="500"
-      />
-      <HangmanLeftLeg
-        v-if="step >= 5"
-        class="absolute top-0"
-        :x="500"
-        :y="500"
-      />
-      <HangmanRightLeg
-        v-if="step >= 6"
-        class="absolute top-0"
-        :x="500"
-        :y="500"
-      />
-    </div>
+  <div class="relative flex justify-center wrapper">
+    <HangmanBase :x="sizeX" :y="sizeY" />
+    <HangmanHead
+      v-if="step >= 1"
+      class="absolute top-0"
+      :x="sizeX"
+      :y="sizeY"
+    />
+    <HangmanBody
+      v-if="step >= 2"
+      class="absolute top-0"
+      :x="sizeX"
+      :y="sizeY"
+    />
+    <HangmanLeftArm
+      v-if="step >= 3"
+      class="absolute top-0"
+      :x="sizeX"
+      :y="sizeY"
+    />
+    <HangmanRightArm
+      v-if="step >= 4"
+      class="absolute top-0"
+      :x="sizeX"
+      :y="sizeY"
+    />
+    <HangmanLeftLeg
+      v-if="step >= 5"
+      class="absolute top-0"
+      :x="sizeX"
+      :y="sizeY"
+    />
+    <HangmanRightLeg
+      v-if="step >= 6"
+      class="absolute top-0"
+      :x="sizeX"
+      :y="sizeY"
+    />
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.wrapper > * {
+  @apply w-full;
+}
+</style>

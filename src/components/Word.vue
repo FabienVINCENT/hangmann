@@ -14,7 +14,7 @@ defineProps<Props>();
     <span
       v-for="(letter, index) in word"
       :key="letter + index"
-      class="border-b-2 border-black"
+      class="border-b-2 border-black w-8 text-center"
     >
       <span :class="{ 'opacity-0': !rightLetters.includes(letter) }">{{
         letter
