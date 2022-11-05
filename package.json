@@ -13,7 +13,6 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "git": "npm run build && git add . && git add dist -f && git commit -m",
     "postgit": "git push && git subtree push --prefix dist origin gh-pages"
-
   },
   "dependencies": {
     "vue": "^3.2.41",
@@ -21,6 +20,7 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
+    "@rvxlab/tailwind-plugin-ios-full-height": "^1.1.0",
     "@types/jsdom": "^20.0.0",
     "@types/node": "^16.11.68",
     "@vitejs/plugin-vue": "^3.1.2",
