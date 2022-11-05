@@ -60,7 +60,9 @@ onMounted(() => init());
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col justify-between items-center wrapper">
+  <div
+    class="min-h-screen min-h-screen-ios flex flex-col justify-between items-center wrapper"
+  >
     <HangmanBoy :step="step" />
     <Word :word="word" :rightLetters="rightLetters" />
     <Keyboard
